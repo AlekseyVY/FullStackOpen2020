@@ -3,6 +3,8 @@ import React from 'react'
 
 
 const Display = ({good, neutral, bad}) => {
+    const all = good + neutral + bad
+
     return (
         <div>
             <h1>
@@ -16,6 +18,15 @@ const Display = ({good, neutral, bad}) => {
             </p>
             <p>
                 bad {bad}
+            </p>
+            <p>
+                all {all}
+            </p>
+            <p>
+                average {(good - bad) / all}
+            </p>
+            <p>
+                positive {(good / all) * 100}
             </p>
         </div>
     )
