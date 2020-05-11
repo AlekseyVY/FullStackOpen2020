@@ -9,6 +9,7 @@ const App = () => {
     const [countries, setCountries] = useState([])
     const [search, setSearch] = useState('')
 
+
     const handleSearch = (event) => {
         setSearch(event.target.value)
     }
@@ -29,6 +30,7 @@ const App = () => {
             return country
         }
     })
+
 
     return(
         <>
