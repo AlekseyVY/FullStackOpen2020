@@ -13,11 +13,14 @@ const App = () => {
         setSearch(event.target.value)
     }
 
+    const handleShow = (event) => {
+        setSearch(event)
+    }
+
     useEffect(() => {
         axios.get('https://restcountries.eu/rest/v2/all')
             .then(response => {
-                const data = response.data
-                setCountries(countries.concat(data))
+                setCountries(countries.concat(response.data))
             })
     }, [])
 
@@ -31,7 +34,7 @@ const App = () => {
         <>
             <Filter handleSearch={handleSearch}
                     search={search} />
-            <CountryList filtered={filtered} />
+            <CountryList filtered={filtered} handleShow={handleShow}/>
         </>
     )
 }

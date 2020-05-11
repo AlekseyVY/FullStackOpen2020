@@ -3,7 +3,6 @@ import React from 'react'
 
 
 const Country = ({city}) => {
-    console.log(city)
     return(
         <>
             <h1>{city.name}</h1>
@@ -15,7 +14,7 @@ const Country = ({city}) => {
             </ul>
             <img src={city.flag}
                  width={'150px'}
-                 height={'150px'} />
+                 height={'150px'} alt={`country flag ${city.name}`}/>
         </>
     )
 }
