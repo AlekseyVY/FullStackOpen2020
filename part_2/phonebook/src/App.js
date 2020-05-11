@@ -1,14 +1,23 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
-import Numbers from "./components/numbers";
-import Data from './components/Data'
+import Numbers from "./components/Numbers";
+import axios from 'axios'
 
 const App =() => {
-    const [persons, setPersons] = useState(Data)
+    const [persons, setPersons] = useState([])
     const [newName, setNewName] = useState('')
     const [newPhone, setNewPhone] = useState('')
     const [search, setSearch] = useState('')
+
+    useEffect(() => {
+        axios.get('http://localhost:3001/persons')
+            .then(response => {
+                const data = response.data
+                setPersons(persons.concat(data))
+            })
+    }, [])
+
 
     const handleChange = (event) => {
         setNewName(event.target.value)
@@ -60,7 +69,7 @@ const App =() => {
                         newName={newName}
                         newPhone={newPhone}
             />
-            <Numbers filtered={filtered}/>
+            <Numbers filtered={filtered} />
         </>
     )
 }
