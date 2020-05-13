@@ -7,7 +7,7 @@ const Numbers = (props) => {
             <h2>
                 Numbers
             </h2>
-            {props.filtered.map(person => <p>{person.name} {person.phone}</p>)}
+            {props.filtered.map((person, i) => <p key={i}>{person.name} {person.number}</p>)}
         </>
     )
 }

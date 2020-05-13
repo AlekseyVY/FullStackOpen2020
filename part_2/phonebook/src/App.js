@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Numbers from "./components/Numbers";
-import axios from 'axios'
+import apiService from './services/api'
 
 const App =() => {
     const [persons, setPersons] = useState([])
@@ -11,11 +11,8 @@ const App =() => {
     const [search, setSearch] = useState('')
 
     useEffect(() => {
-        axios.get('http://localhost:3001/persons')
-            .then(response => {
-                const data = response.data
-                setPersons(persons.concat(data))
-            })
+        apiService.getAll().then(data =>
+                setPersons(persons.concat(data)))
     }, [])
 
 
@@ -33,16 +30,20 @@ const App =() => {
 
     const handleInputEvent = (event) => {
         event.preventDefault()
+        const id = new Date().toISOString()
         const person = {
             name: newName,
-            phone: newPhone
+            number: newPhone
         }
         persons.map(x => {
             if(x.name === newName){
                 check = true
             }
         })
-        check ? alert(`${newName} is already added to phonebook`) : setPersons(persons.concat(person))
+        check ? alert(`${newName} is already added to phonebook`)
+            : apiService.create(person, id).then(data => {
+                setPersons(persons.concat(data))
+            })
         setNewName('')
         setNewPhone('')
     }
