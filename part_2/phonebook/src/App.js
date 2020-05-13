@@ -53,6 +53,11 @@ const App =() => {
         }
     })
 
+    const handleDelete = (id, name) => {
+        window.confirm(`Delete ${name} ?`)
+            ? apiService.remove(id).then(response => console.log(response))
+            : console.log('remove canceled')
+    }
 
 
 
@@ -70,7 +75,7 @@ const App =() => {
                         newName={newName}
                         newPhone={newPhone}
             />
-            <Numbers filtered={filtered} />
+            <Numbers filtered={filtered} handleDelete={handleDelete}/>
         </>
     )
 }
