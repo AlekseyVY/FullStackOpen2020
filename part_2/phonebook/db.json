@@ -4,6 +4,21 @@
       "name": "Mary Poppendieck",
       "number": "39-23-6423122",
       "id": 4
+    },
+    {
+      "name": "Aleksey",
+      "number": "1234567",
+      "id": 5
+    },
+    {
+      "name": "Kirill",
+      "number": "89731487",
+      "id": 6
+    },
+    {
+      "name": "Arto",
+      "number": "246246",
+      "id": 7
     }
   ]
 }

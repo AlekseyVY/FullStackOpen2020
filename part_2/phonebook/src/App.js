@@ -30,7 +30,6 @@ const App =() => {
 
     const handleInputEvent = (event) => {
         event.preventDefault()
-        const id = new Date().toISOString()
         const person = {
             name: newName,
             number: newPhone
@@ -40,8 +39,14 @@ const App =() => {
                 check = true
             }
         })
-        check ? alert(`${newName} is already added to phonebook`)
-            : apiService.create(person, id).then(data => {
+        check ? window.confirm(`${newName} is aready added to phonebook, replace the old number with new one?`)
+            ? apiService.update(persons.filter(person => {
+                if(person.name === newName){
+                    return person.id
+                }
+            }), person).then(data => setPersons(persons.concat(data)))
+            : console.log('no')
+            : apiService.create(person).then(data => {
                 setPersons(persons.concat(data))
             })
         setNewName('')
