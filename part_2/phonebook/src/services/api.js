@@ -14,8 +14,13 @@ const getAll = () => {
 }
 
 const update = (id, person) => {
+    try {
     const request = axios.put(`${baseUrl}/${id[0].id}`, person)
     return request.then(response => response.data)
+} catch(error) {
+        return error
+    }
+
 }
 
 const remove = (id) => {

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "build:ui": "rmdir build /s /q && cd ../part1 && npm run build && xcopy build ..\\part1_backend\\build /s /e /y /i",
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

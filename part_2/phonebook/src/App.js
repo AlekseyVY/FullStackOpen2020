@@ -41,12 +41,15 @@ const App =() => {
                 check = true
             }
         })
-        check ? window.confirm(`${newName} is aready added to phonebook, replace the old number with new one?`)
-            ? apiService.update(persons.filter(person => {
+        check ? window
+                .confirm(`${newName} is aready added to phonebook, replace the old number with new one?`)
+            ? apiService
+                .update(persons.filter(person => {
                 if(person.name === newName){
                     return person.id
                 }
-            }), person).then(data => {
+            }), person)
+                .then(data => {
                 setPersons(persons.concat(data))
                 setNotification(`phone of ${newName} has been updated`)
                 setTimeout(() => {
@@ -54,7 +57,8 @@ const App =() => {
                 }, 5000)
             })
             : console.log('no')
-            : apiService.create(person).then(data => {
+            : apiService
+                .create(person).then(data => {
                 setPersons(persons.concat(data))
                 setNotification(`added ${newName}`)
                 setTimeout(() => {

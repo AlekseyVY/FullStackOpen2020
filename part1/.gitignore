@@ -8,7 +8,7 @@
 /coverage
 
 # production
-/build
+/part1_backend/build
 
 # misc
 .DS_Store
