@@ -50,7 +50,7 @@ const App =() => {
                 }
             }), person)
                 .then(data => {
-                setPersons(persons.concat(data))
+                setPersons(data)
                 setNotification(`phone of ${newName} has been updated`)
                 setTimeout(() => {
                     setNotification(null)
@@ -76,7 +76,11 @@ const App =() => {
 
     const handleDelete = (id, name) => {
         window.confirm(`Delete ${name} ?`)
-            ? apiService.remove(id).then(response => console.log(response))
+            ? apiService.remove(id).then(response => {
+                setNotification(`${name} has been successfully DELETED!`)
+                apiService.getAll().then(data =>
+                    setPersons(data))
+            })
             : console.log('remove canceled')
     }
 
