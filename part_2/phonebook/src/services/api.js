@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = '/api/persons/'
+const baseUrl = 'https://sleepy-stream-21197.herokuapp.com/api/persons'
 
 
 
