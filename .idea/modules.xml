@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../FSO2020_phonebookBackend/.idea/FSO2020_phonebookBackend.iml" filepath="$PROJECT_DIR$/../FSO2020_phonebookBackend/.idea/FSO2020_phonebookBackend.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/FullStackOpen2020.iml" filepath="$PROJECT_DIR$/.idea/FullStackOpen2020.iml" />
     </modules>
   </component>
