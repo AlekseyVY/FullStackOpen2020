@@ -1,16 +1,16 @@
 require('dotenv').config({path: '.env'})
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const url = process.env.MONGODB_URI
 
-console.log(url)
+console.log('connecting to', url)
 
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(result => {
         console.log('connected to MongoDB')
     })
     .catch((error) => {
-        console.log('error connecting to MongoDB:', error)
+        console.log('error connecting to MongoDB:', error.message)
     })
 
 const noteSchema = new mongoose.Schema({
@@ -28,4 +28,3 @@ noteSchema.set('toJSON', {
 })
 
 module.exports = mongoose.model('Note', noteSchema)
-

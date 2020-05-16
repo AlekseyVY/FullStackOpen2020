@@ -1,4 +1,4 @@
-require('dotenv').config({path: '.env'})
+require('dotenv').config()
 const express = require('express')
 const app = express()
 const cors = require('cors')
@@ -20,49 +20,34 @@ app.use(requestLogger)
 app.use(cors())
 app.use(express.static('build'))
 
-app.get('/api/notes',(req, res) => {
+app.get('/api/notes', (request, response) => {
     Note.find({}).then(notes => {
-        res.json(notes)
+        response.json(notes)
     })
 })
 
-app.get('/api/notes/:id', (req, res) => {
-    const id = Number(req.params.id)
-    console.log(id)
-    const note = notes.find(note => {
-        console.log(note.id, typeof note.id, id, typeof id, note.id === id)
-        return note.id === id
+app.get('/api/notes/:id', (request, response) => {
+    Note.findById(request.params.id).then(note => {
+        response.json(note)
     })
-    if(note){
-        res.json(note)
-    } else {
-        res.status(404).end()
-    }
 })
-const generateId = () => {
-    const maxId = notes.length > 0 ? Math.max(...notes.map(n => n.id)) : 0
-    return maxId + 1
-}
 
-app.post('/api/notes', (req, res) => {
-    const body = req.body
+app.post('/api/notes', (request, response) => {
+    const body = request.body
 
-    if(!body.content){
-        return res.status(400).json({
-            error: 'content missing'
-        })
+    if (body.content === undefined) {
+        return response.status(400).json({ error: 'content missing' })
     }
 
-    const note = {
+    const note = new Note({
         content: body.content,
         important: body.important || false,
         date: new Date(),
-        id: generateId()
-    }
+    })
 
-    notes = notes.concat(note)
-
-    res.json(note)
+    note.save().then(savedNote => {
+        response.json(savedNote)
+    })
 })
 
 app.delete('/api/notes/:id', (req, res) => {
@@ -78,7 +63,7 @@ const unknownEndpoint = (request, response) => {
 app.use(unknownEndpoint)
 
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT
 app.listen(PORT, () => {
     console.log(`server running on port ${PORT}`)
 })
