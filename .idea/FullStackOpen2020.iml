@@ -9,5 +9,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="FSO2020_phonebookBackend" />
+    <orderEntry type="module" module-name="bloglist" />
   </component>
 </module>
