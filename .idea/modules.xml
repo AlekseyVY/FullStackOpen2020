@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/../FSO2020_phonebookBackend/.idea/FSO2020_phonebookBackend.iml" filepath="$PROJECT_DIR$/../FSO2020_phonebookBackend/.idea/FSO2020_phonebookBackend.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/FullStackOpen2020.iml" filepath="$PROJECT_DIR$/.idea/FullStackOpen2020.iml" />
       <module fileurl="file://$PROJECT_DIR$/../bloglist/.idea/bloglist.iml" filepath="$PROJECT_DIR$/../bloglist/.idea/bloglist.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../bloglist-frontend/.idea/bloglist-frontend.iml" filepath="$PROJECT_DIR$/../bloglist-frontend/.idea/bloglist-frontend.iml" />
     </modules>
   </component>
 </project>
