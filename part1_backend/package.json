@@ -8,7 +8,8 @@
     "lint": "eslint .",
     "build:ui": "rmdir build /s /q && cd ../part1 && npm run build && xcopy build ..\\part1_backend\\build /s /e /y /i",
     "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "test": "cross-env NODE_ENV=test jest --verbose -runInBand"
+    "test": "cross-env NODE_ENV=test jest --verbose -runInBand",
+    "start:test": "cross-env NODE_ENV=test node index.js"
   },
   "author": "",
   "license": "ISC",
