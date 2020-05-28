@@ -2,7 +2,7 @@ import {addNewAnecdote} from "../reducers/anecdoteReducer";
 import React from "react";
 import { useDispatch } from 'react-redux'
 
-const NoteForm = () => {
+const AnecdoteForum = () => {
     const dispatch = useDispatch()
 
     const addNew = (event) => {
@@ -23,4 +23,4 @@ const NoteForm = () => {
     )
 }
 
-export default NoteForm
+export default AnecdoteForum
