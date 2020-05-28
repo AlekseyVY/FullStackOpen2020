@@ -34,9 +34,9 @@ const reducer = (state = initialState, action) => {
             return state.map(a => a.id !== id ? a : changedVote)
         case 'ADD_NEW':
             return state.concat(action.data)
+        default:
+            return state
     }
-
-    return state
 }
 
 export const voteA = (id) => {
