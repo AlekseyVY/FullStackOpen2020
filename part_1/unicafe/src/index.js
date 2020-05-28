@@ -2,18 +2,33 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import Display from './components/display'
 import Button from './components/Button'
+import reducer from './reducers/reducer'
+import {createStore} from "redux";
 
-
-
+const store = createStore(reducer)
 
 const App = () => {
-    const [good, setGood] = useState(0)
-    const [neutral, setNeutral ] = useState(0)
-    const [ bad, setBad ] = useState(0)
+    const goodClick = () => {
+        store.dispatch({
+            type: 'GOOD'
+        })
+    }
+    const neutralClick = () => {
+        store.dispatch({
+            type: 'OK'
+        })
+    }
+    const badClick = () => {
+        store.dispatch({
+            type: 'BAD'
+        })
+    }
 
-    const goodClick = () => setGood(good + 1)
-    const neutralClick = () => setNeutral(neutral + 1)
-    const badClick = () => setBad(bad + 1)
+    const zero = () => {
+        store.dispatch({
+            type: 'ZERO'
+        })
+    }
 
     return(
         <>
@@ -22,10 +37,14 @@ const App = () => {
             <Button clickHandler={goodClick} text={'good'}/>
             <Button clickHandler={neutralClick} text={'neutral'}/>
             <Button clickHandler={badClick} text={'bad'}/>
+            <Button clickHandler={zero} text={'zero'}/>
             </div>
-            <Display good={good} neutral={neutral} bad={bad}/>
+            <Display good={store.getState().good} neutral={store.getState().ok} bad={store.getState().bad}/>
         </>
     )
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
+const renderApp = () => {ReactDOM.render(<App />, document.getElementById('root'))}
+
+renderApp()
+store.subscribe(renderApp)
