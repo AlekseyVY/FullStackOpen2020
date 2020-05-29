@@ -1,6 +1,7 @@
 import {addNewAnecdote} from "../reducers/anecdoteReducer";
 import React from "react";
 import { useDispatch } from 'react-redux'
+import {newAnecdoteNotification, zero} from "../reducers/notificationReducer";
 
 const AnecdoteForum = () => {
     const dispatch = useDispatch()
@@ -10,6 +11,7 @@ const AnecdoteForum = () => {
         const content = event.target.data.value
         event.target.data.value = ''
         dispatch(addNewAnecdote(content))
+        dispatch(newAnecdoteNotification(content))
     }
 
     return (
