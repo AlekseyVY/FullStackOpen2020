@@ -20,6 +20,7 @@ export const getVoteNotification = (content, time) => {
             type: 'SHOW_VOTE_NOTIFICATION',
             content
         })
+        clearTimeout()
         setTimeout(() => {
             dispatch({type: 'ZERO', data: ''})
         }, time * 1000)
@@ -32,6 +33,7 @@ export const newAnecdoteNotification = (content, time) => {
             type: 'CREATE_NEW_ANECDOTE',
             content
         })
+        clearTimeout()
         setTimeout(() => {
             dispatch({type: 'ZERO', data: ''})
         }, time * 1000)
