@@ -29,17 +29,19 @@ export const init = () => {
     }
 }
 
-export const voteA = (id) => {
-    return {
-        type: 'VOTE',
-        id: id
+export const voteA = (anecdote) => {
+    return async dispatch => {
+        await anecdoteService.update(anecdote)
+        dispatch({
+            type: 'VOTE',
+            id: anecdote.id
+        })
     }
 }
 
 export const addNewAnecdote = (content) => {
     return async dispatch => {
         const newAnecdote = await anecdoteService.createNew(content)
-        console.log(newAnecdote)
         dispatch({
             type: 'ADD_NEW',
             data: newAnecdote

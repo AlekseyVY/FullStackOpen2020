@@ -12,7 +12,7 @@ const AnecdoteList = () => {
     const dispatch = useDispatch()
 
     const vote = (anecdote) => {
-        dispatch(voteA(anecdote.id))
+        dispatch(voteA(anecdote))
         dispatch(getVoteNotification(anecdote.content))
     }
 
