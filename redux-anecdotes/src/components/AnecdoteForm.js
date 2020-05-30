@@ -1,17 +1,15 @@
 import {addNewAnecdote} from "../reducers/anecdoteReducer";
 import React from "react";
-import { useDispatch } from 'react-redux'
+import { connect } from 'react-redux'
 import {newAnecdoteNotification} from "../reducers/notificationReducer";
 
-const AnecdoteForum = () => {
-    const dispatch = useDispatch()
-
+const AnecdoteForum = (props) => {
     const addNew = async (event) => {
         event.preventDefault()
         const content = event.target.data.value
         event.target.data.value = ''
-        dispatch(addNewAnecdote(content))
-        dispatch(newAnecdoteNotification(`You added new anecdote: ${content}`, 5))
+        props.addNewAnecdote(content)
+        props.newAnecdoteNotification(`You added new anecdote: ${content}`, 5)
     }
 
     return (
@@ -25,4 +23,9 @@ const AnecdoteForum = () => {
     )
 }
 
-export default AnecdoteForum
+const mapDispatchToProps = {
+    newAnecdoteNotification, addNewAnecdote
+}
+
+const ConnectedAnecdoteForm = connect(null, mapDispatchToProps)(AnecdoteForum)
+export default ConnectedAnecdoteForm
