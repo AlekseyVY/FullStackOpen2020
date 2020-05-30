@@ -4,34 +4,39 @@
 const reducer = (state = [], action) => {
     switch (action.type) {
         case 'SHOW_VOTE_NOTIFICATION':
-            return state.concat('You voted for "' + action.data +'"')
+            return action.content
         case 'CREATE_NEW_ANECDOTE':
-            return state.concat('You added new anecdote: "' + action.data +'" to your list.')
+            return action.content
         case 'ZERO':
-            return ''
+            return action.data
         default:
             return state
     }
 }
 
-export const getVoteNotification = (props) => {
-    return {
-        type: 'SHOW_VOTE_NOTIFICATION',
-        data: props
+export const getVoteNotification = (content, time) => {
+    return async dispatch => {
+        dispatch({
+            type: 'SHOW_VOTE_NOTIFICATION',
+            content
+        })
+        setTimeout(() => {
+            dispatch({type: 'ZERO', data: ''})
+        }, time * 1000)
     }
 }
 
-export const newAnecdoteNotification = (props) => {
-    return {
-        type: 'CREATE_NEW_ANECDOTE',
-        data: props
+export const newAnecdoteNotification = (content, time) => {
+    return async dispatch => {
+         dispatch({
+            type: 'CREATE_NEW_ANECDOTE',
+            content
+        })
+        setTimeout(() => {
+            dispatch({type: 'ZERO', data: ''})
+        }, time * 1000)
     }
 }
 
-export const zero = () => {
-    return {
-        type: 'ZERO'
-    }
-}
 
 export default reducer

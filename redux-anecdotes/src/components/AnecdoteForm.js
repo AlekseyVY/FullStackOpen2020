@@ -11,7 +11,7 @@ const AnecdoteForum = () => {
         const content = event.target.data.value
         event.target.data.value = ''
         dispatch(addNewAnecdote(content))
-        dispatch(newAnecdoteNotification(content))
+        dispatch(newAnecdoteNotification(`You added new anecdote: ${content}`, 5))
     }
 
     return (
