@@ -61,6 +61,10 @@ const CreateNew = (props) => {
       info,
       votes: 0
     })
+      setContent('')
+      setAuthor('')
+      setInfo('')
+
   }
 
   return (
@@ -79,7 +83,7 @@ const CreateNew = (props) => {
             url for more info
             <input name='info' value={info} onChange={(e)=> setInfo(e.target.value)} />
           </div>
-          <button>create</button>
+          <button type={'submit'}>create</button>
         </form>
       </div>
   )
@@ -109,6 +113,10 @@ const App = () => {
   const addNew = (anecdote) => {
     anecdote.id = (Math.random() * 10000).toFixed(0)
     setAnecdotes(anecdotes.concat(anecdote))
+      setNotification(`${anecdote.content} by ${anecdote.author} has been added!`)
+      setTimeout(() => {
+          setNotification('')
+      }, 10000)
   }
 
   const anecdoteById = (id) =>
@@ -125,8 +133,18 @@ const App = () => {
     setAnecdotes(anecdotes.map(a => a.id === id ? voted : a))
   }
 
+    const style = {
+        border: 'solid',
+        padding: 10,
+        borderWidth: 1,
+        color: 'red'
+    }
+
   return (
       <div>
+          <div style={style}>
+          {notification === '' ? 'Nothing New' : notification}
+          </div>
           <Router>
               <Link to={'/'} >Anecdotes</Link>
               <Link to={'/create'} >Create new</Link>
