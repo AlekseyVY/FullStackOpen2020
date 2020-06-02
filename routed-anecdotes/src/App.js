@@ -3,6 +3,7 @@ import {
     BrowserRouter as Router,
     Switch, Route, Link, useParams
 } from 'react-router-dom'
+import {useField} from "./hooks";
 
 const Anecdote = ( {anecdotes} ) => {
     const id = useParams().id
@@ -10,17 +11,19 @@ const Anecdote = ( {anecdotes} ) => {
     return (
         <div>
             <h1>Anecdote:</h1>
-            <h2>{anecdote.content}</h2>
-            <h2>Author: {anecdote.author}</h2>
+            <h2>{anecdote.content.value}</h2>
+            <h2>Author: {anecdote.author.value}</h2>
+            <h2>Url: {anecdote.info.value}</h2>
             <h2>Votes: {anecdote.votes}</h2>
         </div>
     )
 }
 const AnecdoteList = ({ anecdotes }) => (
     <div>
+        {console.log(anecdotes)}
       <h2>Anecdotes</h2>
       <ul>
-        {anecdotes.map(anecdote => <li key={anecdote.id}><Link to={`/anecdotes/${anecdote.id}`}>{anecdote.content}</Link></li>)}
+        {anecdotes.map(anecdote => <li key={anecdote.id}><Link to={`/anecdotes/${anecdote.id}`}>{anecdote.content.value}</Link></li>)}
       </ul>
     </div>
 )
@@ -48,9 +51,9 @@ const Footer = () => (
 )
 
 const CreateNew = (props) => {
-  const [content, setContent] = useState('')
-  const [author, setAuthor] = useState('')
-  const [info, setInfo] = useState('')
+    const content = useField('text')
+    const author = useField('text')
+    const info = useField('text')
 
 
   const handleSubmit = (e) => {
@@ -61,10 +64,6 @@ const CreateNew = (props) => {
       info,
       votes: 0
     })
-      setContent('')
-      setAuthor('')
-      setInfo('')
-
   }
 
   return (
@@ -73,15 +72,15 @@ const CreateNew = (props) => {
         <form onSubmit={handleSubmit}>
           <div>
             content
-            <input name='content' value={content} onChange={(e) => setContent(e.target.value)} />
+            <input {...content}/>
           </div>
           <div>
             author
-            <input name='author' value={author} onChange={(e) => setAuthor(e.target.value)} />
+            <input {...author}/>
           </div>
           <div>
             url for more info
-            <input name='info' value={info} onChange={(e)=> setInfo(e.target.value)} />
+            <input {...info}/>
           </div>
           <button type={'submit'}>create</button>
         </form>
@@ -91,29 +90,15 @@ const CreateNew = (props) => {
 }
 
 const App = () => {
-  const [anecdotes, setAnecdotes] = useState([
-    {
-      content: 'If it hurts, do it more often',
-      author: 'Jez Humble',
-      info: 'https://martinfowler.com/bliki/FrequencyReducesDifficulty.html',
-      votes: 0,
-      id: '1'
-    },
-    {
-      content: 'Premature optimization is the root of all evil',
-      author: 'Donald Knuth',
-      info: 'http://wiki.c2.com/?PrematureOptimization',
-      votes: 0,
-      id: '2'
-    }
-  ])
+  const [anecdotes, setAnecdotes] = useState([])
 
-  const [notification, setNotification] = useState('')
+    const [notification, setNotification] = useState('')
 
   const addNew = (anecdote) => {
     anecdote.id = (Math.random() * 10000).toFixed(0)
     setAnecdotes(anecdotes.concat(anecdote))
-      setNotification(`${anecdote.content} by ${anecdote.author} has been added!`)
+      console.log(anecdote)
+      setNotification(`${anecdote.content.value} by ${anecdote.author.value} has been added!`)
       setTimeout(() => {
           setNotification('')
       }, 10000)
