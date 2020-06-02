@@ -8,7 +8,7 @@ export const useField = (type) => {
     }
 
     const zero = () => {
-        setValue('')
+         setValue('')
     }
     return {
         type, value, onChange, zero
